@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request,redirect
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy as data
+from flask_login import UserMixin
 
 
 app = Flask(__name__)
@@ -9,7 +10,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-class Register(db.Model):
+class Register(db.Model, UserMixin):
     id = data.Column(data.Integer,primary_key=True) 
     name_lastname = data.Column(data.String(100),nullable=False)
     password = data.Column(data.Integer,nullable=False) 
@@ -50,12 +51,13 @@ def datasave():
     db.session.commit()
     return redirect('/register')
 
-@app.route('/showdata')
-def showdata():
-    register = Register.query.all()
-    return render_template ("showdata.html",register = register)
-
 @app.route('/addschool')
 def school():
-    return render_template('addschool.html')
+    register = Register.query.all()
+    return render_template('addschool.html',register = register)
+
+@app.route('/showdatas')
+def showdatas():
+   registers = Register.query.all()
+   return render_template("show.html",registers=registers)
 app.run(debug=1)

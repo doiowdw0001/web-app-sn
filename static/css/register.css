@@ -3,14 +3,7 @@
     height: 100vh !important;
     }
     }
-/* .img {
-    width: 390px;
-    aspect-ratio: auto 390 / 143;
-    height: 143px;
-    display: block;
-    -webkit-user-select: none;
-    margin: auto;
-    cursor: zoom-in;
-    background-color: hsl(0, 0%, 90%);
-    transition: background-color 300ms;
-} */
+    
+mt-2{
+    display: inline;
+}
